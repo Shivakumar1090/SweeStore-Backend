@@ -6,11 +6,13 @@ const User = require('../../models/User');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const validation = joi.object({
-    email : joi.string().min(10).max(100).required().email(),
+    email : joi.string().max(100).required().email(),
     password: joi.string().min(6).max(100).required(),
 })
 
 const Login = async(req,res) => {
+    const { authorization } = req.headers;
+
     const {
         error ,
         value: {email,password}
@@ -23,10 +25,10 @@ const Login = async(req,res) => {
         const savedUser = await User.findOne({email: email});
 
         if(savedUser && bcrypt.compareSync(password,savedUser.password)){
-            let token = jwt.sign({_id: user._id} , JWT_SECRET);
+            let token = jwt.sign({_id: savedUser._id} , JWT_SECRET);
             const {name,email,_id} = savedUser;
-            const data = {token,name,email,_id};
-            res.status(200).json({data , Message: 'Successfully logged in!'})
+            const user = {name,email,_id};
+            res.status(200).json({token , authorization , user , Message: 'Successfully logged in!'})
         } else{
             res.status(404).send({ Message: "Invalid  Credentials." });
         }

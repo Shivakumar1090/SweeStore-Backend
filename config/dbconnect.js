@@ -7,8 +7,8 @@ const ConnectDB = () => {
     mongoose.set('strictQuery', true);
 
     mongoose.connect(MONGOURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
     });
 
     mongoose.Promise = global.Promise;

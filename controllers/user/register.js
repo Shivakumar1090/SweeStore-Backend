@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const validation = Joi.object({
     name: Joi.string().min(3).max(50).required(),
-    email : Joi.string().min(10).max(100).required().email(),
+    email : Joi.string().max(100).required().email(),
     password: Joi.string().min(6).max(100).required(),
 })
 
@@ -29,6 +29,7 @@ const Register = async(req,res) => {
                             name,
                             email,
                             password: hashedPassword,
+                            admin: false,
                         });
 
                         await newuser.save();

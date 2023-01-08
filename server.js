@@ -23,9 +23,11 @@ ConnectDB();
 //Routes
 const UserRoute = require('./routes/user');
 const ProductsRoute = require('./routes/products');
+const CartRoutes = require('./routes/cart');
 
 app.use('/', UserRoute);
 app.use('/products',ProductsRoute);
+app.use('/cart' , CartRoutes)
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}!`);
