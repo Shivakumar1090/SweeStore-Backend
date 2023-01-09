@@ -34,4 +34,7 @@ const OrderSchema = new mongoose.Schema({
         required: true,
         enum: ['COD', 'Card']
     }
-})
+});
+
+const Order = mongoose.model('order' , OrderSchema);
+module.exports = Order;
