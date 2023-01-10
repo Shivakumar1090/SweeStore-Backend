@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const userMiddleware = require('../middlewares/user');
+const adminMiddleware = require('../middlewares/admin');
+
 const { upload, storageEngine } = require("../utility/upload");
 const outputFolder = './uploads/products';
 

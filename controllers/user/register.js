@@ -29,7 +29,7 @@ const Register = async(req,res) => {
                             name,
                             email,
                             password: hashedPassword,
-                            admin: false,
+                            isAdmin: false,
                         });
 
                         await newuser.save();

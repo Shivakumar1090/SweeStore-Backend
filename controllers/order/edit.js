@@ -3,6 +3,7 @@ const Order = require('../../models/Order');
 
 const editOrder = async (req, res) => {
   const { id } = req.params;
+  console.log(id);
   console.log(req.body);
   Order.findByIdAndUpdate(id, req.body, { new: true }, (err, order) => {
     if (err) {

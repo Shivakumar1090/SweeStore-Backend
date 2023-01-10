@@ -4,6 +4,11 @@ const Order = require('../../models/Order');
 
 const getOrders = async (req, res) => {
   const { id } = req.body;
+
+  if(!id){
+    let data = await Order.find();
+    return res.send(data);
+  }
   
   let user, orders;
 

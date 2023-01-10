@@ -26,9 +26,8 @@ const Login = async(req,res) => {
 
         if(savedUser && bcrypt.compareSync(password,savedUser.password)){
             let token = jwt.sign({_id: savedUser._id} , JWT_SECRET);
-            const {name,email,_id} = savedUser;
-            const user = {name,email,_id};
-            res.status(200).json({token , authorization , user , Message: 'Successfully logged in!'})
+            const {name,email,_id ,isAdmin} = savedUser;
+            res.status(200).json({token , authorization , name, email , _id , isAdmin})
         } else{
             res.status(404).send({ Message: "Invalid  Credentials." });
         }
